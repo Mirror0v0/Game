@@ -1,0 +1,20 @@
+[
+  {
+    "ID": 1,
+    "Name": 1,
+    "Attack": 1,
+    "HP": 10,
+    "MaxHP": 10,
+    "Defend": 0,
+    "AttackRange": 1
+  },
+  {
+    "ID": 2,
+    "Name": 2,
+    "Attack": 1,
+    "HP": 10,
+    "MaxHP": 10,
+    "Defend": 0,
+    "AttackRange": 1
+  }
+]

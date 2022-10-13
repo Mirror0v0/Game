@@ -37,8 +37,10 @@ public class GameMgr:Singleton <GameMgr>
         //ResMgr.instance.Init();
 
         //跳转第一个游戏逻辑界面
+        //SceneMgr.instance.LoadScene("Login", () => BaseUIMgr.instance.Open<Login>());
         SceneManager.LoadScene("Login");
-        UIManager.instance.Replace("UI/Login/Login", UILayer.Normal);
+        BaseUIMgr.instance.Open<Login>();
+        //UIManager.instance.Replace("UI/Login/Login", UILayer.Normal);
 
     }
 
