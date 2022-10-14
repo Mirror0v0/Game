@@ -22,7 +22,10 @@ public class Role:Creature
     private void BindingControlEvent()
     {
         //绑定摇杆
+        Debug.Log("摇杆事件绑定初始化");
         FightUIMgr.instance.BindingJoystick(OnJoystickMove, OnJoystickMoveEnd);
+        //绑定技能事件
+        FightUIMgr.instance.BindSkillBtn(OnSkill);
     }
 
     private void OnJoystickMoveEnd()
@@ -33,6 +36,11 @@ public class Role:Creature
     private void OnJoystickMove(Vector2 moveDir)
     {
         this.transform.position  = this.transform.position+ new Vector3 (moveDir .x ,moveDir .y,0).normalized * Time .deltaTime * moveSpeed;
+    }
+
+    private void OnSkill(int index)
+    {
+        CastSkill(index);
     }
 }
 

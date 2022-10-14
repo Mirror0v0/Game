@@ -15,8 +15,20 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class SceneMgr : Singleton<SceneMgr>
 {
-    //场景加载
-    public void LoadScene(string sceneName,Action onLoadEnd)
+    public void LoadScene(string sceneName, Action onLoadEnd)
+    {
+        UIManager.instance.EventSystemEnabled = false;
+        SceneManager.LoadScene(sceneName);
+        if(onLoadEnd !=null )
+        {
+            onLoadEnd();
+        }
+        UIManager.instance.EventSystemEnabled = true;
+    }
+
+
+    //场景异步加载
+    public void LoadSceneAsync(string sceneName,Action onLoadEnd)
     {
         UIManager.instance.EventSystemEnabled = false;
         //加载场景之前应有个Loading界面将整个场景盖住，在UI得Top层（Loading显示界面放这儿）

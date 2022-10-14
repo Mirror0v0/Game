@@ -23,16 +23,15 @@ public static class Util
 
 
     /// <summary>
-    /// 2.5D游戏的距离判断方式
+    /// 2D游戏的距离判断方式
     /// </summary>
     /// <param name="a"></param>
     /// <param name="b"></param>
     /// <returns></returns>
-    public static float Distance2_5D(Vector3 a,Vector3 b)
+    public static float Distance2D(Vector2 a,Vector2 b)
     {
-        return  Vector3.Distance(new Vector3(a.x, 0, a.z), 
-            new Vector3(b.x, 0, b.z));
-
+        return  Vector2.Distance(new Vector2(a.x,a.y), 
+            new Vector2(b.x, b.y));
     }
 
     internal static void SafeActionCallback(Action exitCallBack)

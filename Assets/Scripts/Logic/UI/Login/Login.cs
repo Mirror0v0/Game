@@ -26,12 +26,15 @@ public class Login : BaseUI
 
     private void OnBtnEnterClick()
     {
+        BaseUIMgr.instance.Close(this);
+        //SceneMgr.instance.LoadSceneAsync("Level1", OnLoadEnd);
         SceneMgr.instance.LoadScene("Level1", OnLoadEnd);
     }
 
     private void OnLoadEnd()
     {
-        BaseUIMgr.instance.Close(this);
+        //BaseUIMgr.instance.Close(this);
         FightUIMgr.instance.Init();
+        Debug.Log("场景进入后初始化");
     }
 }
