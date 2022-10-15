@@ -7,7 +7,10 @@ using UnityEngine;
 
 public class Role:Creature 
 {
+
     public float moveSpeed = 3.0f;
+
+    public bool isTurn = true;
     public override void Init(CreateSceneCreature serverData, CreatureSceneDatabase tableData)
     {
         base.Init(serverData, tableData);
@@ -17,6 +20,11 @@ public class Role:Creature
     private void Awake()
     {
         RoleMgr.instance.CreateSceneRole(this);
+    }
+
+    public override void Update()
+    {
+        base.Update();
     }
 
     private void BindingControlEvent()
@@ -30,11 +38,32 @@ public class Role:Creature
 
     private void OnJoystickMoveEnd()
     {
-        
+        SetState(CreatureState.Idle);
     }
 
     private void OnJoystickMove(Vector2 moveDir)
     {
+        if(GetState () ==CreatureState.NormalAttack)
+        {
+            return;
+        }
+        SetState(CreatureState.Move);
+        if(moveDir .x<0)
+        {
+            isTurn = false;
+        }
+        else
+        {
+            isTurn = true;
+        }
+        if(!isTurn)
+        {
+            this.transform.localScale = new Vector3(-MathF .Abs( this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.z);
+        }
+        else
+        {
+            this.transform.localScale = new Vector3(MathF.Abs(this.transform.localScale.x), this.transform.localScale.y, this.transform.localScale.z);
+        }
         this.transform.position  = this.transform.position+ new Vector3 (moveDir .x ,moveDir .y,0).normalized * Time .deltaTime * moveSpeed;
     }
 

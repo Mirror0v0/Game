@@ -111,7 +111,7 @@ public class Creature : MonoBehaviour
     {
         this.serverData = serverData;
         this.tableData = tableData;
-
+        _animator = this.GetComponent<Animator>();
         _skillMgr.Init(this);
     }
 

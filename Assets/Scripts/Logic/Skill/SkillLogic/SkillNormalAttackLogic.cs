@@ -15,8 +15,8 @@ public class SkillNormalAttackLogic:SkillLogicBase
         _timeLine.AddEvent(0, 0, OnSkillStart);//技能开始
         _timeLine.AddEvent(0, 20, OnAction);//播放动画
         _timeLine.AddEvent(0.2f, 0, OnNormalHit);//直接进行伤害结算
-        _timeLine.AddEvent(2.333f, 17, OnActionEnd);//停止动画
-        _timeLine.AddEvent(2.333f, 0, OnSkillEnd);//技能结束                                    
+        _timeLine.AddEvent(0.833f, 20, OnActionEnd);//停止动画
+        _timeLine.AddEvent(0.833f, 0, OnSkillEnd);//技能结束                                    
     }
 
     //伤害结算，目前不需要参数

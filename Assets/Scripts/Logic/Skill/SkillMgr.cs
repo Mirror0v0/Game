@@ -58,29 +58,32 @@ public class SkillMgr
         SkillObject skillObj1 = new SkillObject();
         skillObj1.logic = new SkillNormalAttackLogic();
         skillObj1.tableData = new SkillDatabase();
-        skillObj1.tableData.castRange = 2;
+        skillObj1.tableData.castRange = -2;
         skillObj1.tableData.cd = 2;
         skillObj1.tableData.cost = 2;
         skillObj1.tableData.damage = 2;
         skillObj1.tableData.preTime = 2;
+        skillObj1.logic.Init(_owner, skillObj1.tableData);
 
         SkillObject skillObj2 = new SkillObject();
         skillObj2.logic = new SkillNormalAttackLogic();
         skillObj2.tableData = new SkillDatabase();
-        skillObj2.tableData.castRange = 2;
+        skillObj2.tableData.castRange = -2;
         skillObj2.tableData.cd = 2;
         skillObj2.tableData.cost = 2;
         skillObj2.tableData.damage = 2;
         skillObj2.tableData.preTime = 2;
+        skillObj2.logic.Init(_owner, skillObj2.tableData);
 
         SkillObject skillObj3 = new SkillObject();
         skillObj3.logic = new SkillNormalAttackLogic();
         skillObj3.tableData = new SkillDatabase();
-        skillObj3.tableData.castRange = 2;
+        skillObj3.tableData.castRange = -2;
         skillObj3.tableData.cd = 2;
         skillObj3.tableData.cost = 2;
         skillObj3.tableData.damage = 2;
         skillObj3.tableData.preTime = 2;
+        skillObj3.logic.Init(_owner, skillObj3.tableData);
 
         _allSkill.Add(skillObj1);
         _allSkill.Add(skillObj2);

@@ -75,17 +75,17 @@ public abstract class SkillLogicBase
     protected virtual void OnActionEnd(int actionID)
     {
         Debug.Log("OnActionEnd");
-        //if (_caster.GetAnim() == actionID)
-        //{
-        //    _caster.SetAni(1);
-        //}
+        if (_caster.GetAnim() == actionID)
+        {
+            _caster.SetAni(1);
+        }
     }
 
     //播放相应动画
     protected virtual void OnAction(int actionID)
     {
         Debug.Log("OnAction");
-       // _caster.SetAni(actionID);
+        _caster.SetAni(actionID);
     }
 
 
