@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 public class RoleMgr:Singleton <RoleMgr>
 {
     //public Dictionary<int, Role> AllRole = new Dictionary<int, Role>();//就一个主角（留着以后拓展）
-
+    public List<Role> roleList = new List<Role>();
     public void CreateSceneRole(Role role)
     {
         //配置表读取静态数据
@@ -26,6 +26,7 @@ public class RoleMgr:Singleton <RoleMgr>
         serverData.maxHp = database.maxHp;
 
         role.Init(serverData, database);
+        roleList.Add(role);
 
     }
 }

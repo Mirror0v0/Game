@@ -20,9 +20,9 @@ public static class GameSetting
         MainRoleLayer = LayerMask.NameToLayer("MainRole");
     }
 
-    public const float MaxVisualSenseDis = 10f;
+    public const float MaxVisualSenseDis = 4f;
 
-    public const float MaxAutoSelectDis = 10f;
+    public const float MaxAutoSelectDis = 4f;
 
     public const int MaxSkillNum = 3;
 }

@@ -11,9 +11,14 @@ public class Role:Creature
     public float moveSpeed = 3.0f;
 
     public bool isTurn = true;
+
+    private SelectMgr _selectMgr = new SelectMgr();
+
     public override void Init(CreateSceneCreature serverData, CreatureSceneDatabase tableData)
     {
         base.Init(serverData, tableData);
+        _selectMgr.Init(this);
+        _skillMgr.autoSelectCallback += SelectCreature;
         BindingControlEvent();
     }
 
@@ -70,6 +75,11 @@ public class Role:Creature
     private void OnSkill(int index)
     {
         CastSkill(index);
+    }
+
+    private void SelectCreature(Creature creature)
+    {
+        _selectMgr.Select(creature);
     }
 }
 

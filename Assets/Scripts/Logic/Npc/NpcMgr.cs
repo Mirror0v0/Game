@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 public class NpcMgr : Singleton <NpcMgr>
 {
     //public Dictionary<int, Role> AllRole = new Dictionary<int, Role>();//就一个主角（留着以后拓展）
-
+    public List<Npc> allNpc = new List<Npc>();
     public void CreateSceneNpc(Npc npc)//npc初始化的时候要注意是什么类型（）
     {
         //配置表读取静态数据
@@ -26,6 +26,7 @@ public class NpcMgr : Singleton <NpcMgr>
         serverData.maxHp = database.maxHp;
 
         npc.Init(serverData, database);
+        allNpc.Add(npc);
     }
 }
 

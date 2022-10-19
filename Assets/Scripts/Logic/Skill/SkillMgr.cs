@@ -35,7 +35,7 @@ public class SkillMgr
 
     private SkillCaster _skillCaster=new SkillCaster ();//施放器
 
-    //private CastSkillAssist _skillAssit = new CastSkillAssist();
+    private CastSkillAssist _skillAssit = new CastSkillAssist();
 
     public Action<Creature> autoSelectCallback;
     public bool IsCastingSkill
@@ -52,6 +52,7 @@ public class SkillMgr
 
         //初始化时将技能的拥有者传进来
         _skillCaster.Init(_owner);
+        _skillAssit.Init(_owner);
         //初始化技能
         //1：普攻    2:交互       3.背刺
         //测试（后面读配置表）
@@ -135,8 +136,23 @@ public class SkillMgr
                 //_owner.TraceTo(_owner.curTarget, skillObj.tableData.CastRange, () => OnAssitFinish(skillObj.logic));//将技能辅助施放封装成方法
                 return;
             }
-        } 
-            CastSkill(skillObj.logic);
+        }
+        _owner .curTarget = _skillAssit.SelectEnemy();
+        if (_owner.curTarget != null)
+        {
+            Util.SafeCall(autoSelectCallback, _owner.curTarget);
+            float enemyDis = Vector2.Distance(_owner.curTarget.transform.position, _owner.transform.position);
+            Vector2 backPos = _owner.curTarget.backPos.transform.localToWorldMatrix.MultiplyPoint(_owner.curTarget.backPos.transform.localPosition);
+            float backDis = Vector2.Distance(backPos, _owner.transform.position);
+            if(backDis >enemyDis )
+            {
+                //
+                Debug.Log("面向敌人前方");
+                return;
+            }
+        }
+        Debug.Log("找到目标可以放技能了");
+        CastSkill(skillObj.logic);
     }
 
 

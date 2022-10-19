@@ -17,6 +17,8 @@ public class Creature : MonoBehaviour
 
     protected SkillMgr _skillMgr = new SkillMgr();
 
+    public Transform backPos;
+
     //能否放技能
     public bool isCastingSkill
     {
@@ -100,6 +102,11 @@ public class Creature : MonoBehaviour
 
         //设置死亡状态
         SetState(CreatureState.Die);
+    }
+
+    virtual public void OnDestroy()
+    {
+        
     }
 
     virtual public void Update()

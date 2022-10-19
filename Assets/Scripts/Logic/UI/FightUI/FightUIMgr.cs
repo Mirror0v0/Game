@@ -79,7 +79,7 @@ public class FightUIMgr:Singleton<FightUIMgr>
 
     public void SetTargetInfo(int curHp, int maxHp, bool bActive = true)//要对接血条，因此要继续加参数，并且给血量数值默认参数都为-1（不要给默认值）
     {
-        //SetTargetActive(true);
+        SetTargetActive(true);
         _targetHead.SetInfo(curHp, maxHp, bActive);
     }
 
