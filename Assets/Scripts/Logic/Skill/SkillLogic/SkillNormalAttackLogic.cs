@@ -34,6 +34,7 @@ public class SkillNormalAttackLogic:SkillLogicBase
     {
         //造成伤害（伤害计算）
         DamageMgr.instance.Damage(_caster, target);
+        FightUIMgr.instance.SetHideImage(true);
     }
 }
 

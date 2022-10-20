@@ -138,6 +138,10 @@ public class SkillMgr
             }
         }
         _owner .curTarget = _skillAssit.SelectEnemy();
+        if(_owner.curTarget.HP <= 0)
+        {
+            return;
+        }
         if (_owner.curTarget != null)
         {
             Util.SafeCall(autoSelectCallback, _owner.curTarget);
@@ -150,9 +154,15 @@ public class SkillMgr
                 Debug.Log("面向敌人前方");
                 return;
             }
+            
         }
         Debug.Log("找到目标可以放技能了");
         CastSkill(skillObj.logic);
+    }
+
+    public Creature FindNpc()
+    {
+        return _skillAssit.SelectEnemy();
     }
 
 

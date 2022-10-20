@@ -34,6 +34,8 @@ public class FightUIMgr:Singleton<FightUIMgr>
         if (_skillDlgAtk == null)
         {
             _skillDlgAtk = new SkillAtkDlg();
+            SetHideImage(false, 1);
+            SetHideImage(true, 0);
         }
     }
 
@@ -121,5 +123,11 @@ public class FightUIMgr:Singleton<FightUIMgr>
         }
         _targetHead.Hide();
     }
+
+    public void SetHideImage(bool isActive,int index=0)
+    {
+        _skillDlgAtk.HideImageSetActive(isActive, index);
+    }
+
 }
 

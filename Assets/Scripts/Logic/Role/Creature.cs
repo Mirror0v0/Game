@@ -99,7 +99,10 @@ public class Creature : MonoBehaviour
     {
         Debug.Log("ËÀÍö");
         //Í£Ö¹ÒÆ¶¯
-
+        if(curState ==CreatureState.Die)
+        {
+            return;
+        }
         //ÉèÖÃËÀÍö×´Ì¬
         SetState(CreatureState.Die);
     }

@@ -14,6 +14,8 @@ public class Role:Creature
 
     private SelectMgr _selectMgr = new SelectMgr();
 
+    private Npc _targetNpc;
+
     public override void Init(CreateSceneCreature serverData, CreatureSceneDatabase tableData)
     {
         base.Init(serverData, tableData);
@@ -30,6 +32,26 @@ public class Role:Creature
     public override void Update()
     {
         base.Update();
+
+        _targetNpc = _skillMgr.FindNpc() as Npc;
+        if(_targetNpc !=null&&_targetNpc .HP >0 )
+        {
+            float enemyDis = Vector2.Distance(this.transform.position, _targetNpc.transform.position);
+            Vector2 backPos = _targetNpc .backPos.transform.localToWorldMatrix.MultiplyPoint(_targetNpc.backPos.transform.localPosition);
+            float backDis = Vector2.Distance(backPos, this.transform.position);
+            if (backDis > enemyDis)
+            {
+                FightUIMgr.instance.SetHideImage(true);
+                //Debug.Log("面向敌人前方");
+                return;
+            }
+            FightUIMgr.instance.SetHideImage(false);
+        }
+        else
+        {
+            FightUIMgr.instance.SetHideImage(true);
+        }
+        
     }
 
     private void BindingControlEvent()

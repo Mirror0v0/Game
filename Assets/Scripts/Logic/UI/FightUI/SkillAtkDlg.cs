@@ -25,9 +25,15 @@ public class SkillAtkDlg
             skillPanel.btn = _root.Find<Button>(panelName);
             skillPanel.countDown = _root.Find<Image>(panelName + "/CountDownImage");//注意加斜杠
             skillPanel.cdText = _root.Find<Text>(panelName + "/CountDownText");
+            skillPanel.hideImage = _root.Find<Image>(panelName + "/Hide");
             skillPanel.btn.onClick.AddListener(() => { OnSkillClick(index); });
             _allSkillPanel.Add(skillPanel);
         }
+    }
+
+    public void HideImageSetActive(bool isActive,int index)
+    {
+        _allSkillPanel[index].hideImage.enabled = isActive;
     }
 
     private void OnSkillClick(int index)
@@ -48,6 +54,8 @@ public class SkillPanel
     public Image countDown;
     //技能冷却时间的计时
     public Text cdText;
+
+    public Image hideImage;
 
 }
 

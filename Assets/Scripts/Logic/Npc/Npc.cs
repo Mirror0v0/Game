@@ -36,6 +36,10 @@ public class Npc:Creature
     private float _lineIncreaseValue = 1f;
     private float _lineDecreaseValue = 1f;
     public bool isTurn = false;
+    private float _warningDeclineTimer = 5f;
+    private float _warningDeclineTime = 0;
+    private bool _warningCanDecline = true;
+
     public override void Init(CreateSceneCreature serverData, CreatureSceneDatabase tableData)
     {
         base.Init(serverData, tableData);
@@ -76,6 +80,10 @@ public class Npc:Creature
 
     public override void Update()
     {
+        if (!IsAlive)
+        {
+            return;
+        }
         base.Update();
         if(_isPatrol )
         {
@@ -96,11 +104,20 @@ public class Npc:Creature
         }
         if(IsInRange ())//在扇形攻击范围内则警戒线变化
         {
+            _warningDeclineTime = 0;
             _npcWarningLine.WarningLineIncrease(_lineIncreaseValue);
         }
         else
         {
-            _npcWarningLine.WarningLineDecrease(_lineDecreaseValue);
+            if(_warningCanDecline)
+            {
+                _warningDeclineTime += Time.deltaTime;
+                if (_warningDeclineTime > _warningDeclineTimer)
+                {
+                    _npcWarningLine.WarningLineDecrease(_lineDecreaseValue);
+                }
+            }
+            
         }
         //_npcWarningLine.WarningLineDecline();
     }
@@ -108,7 +125,8 @@ public class Npc:Creature
     //是否在扇形范围内
     public bool IsInRange()
     {
-        if(Vector2 .Distance (this.transform .position,_targetRole.transform .position )<_targetDis)
+        
+        if(Vector2 .Distance (this.transform .position,_targetRole.transform .position )>_targetDis)
         {
             return false;
         }

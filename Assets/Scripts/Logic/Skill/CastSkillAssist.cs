@@ -39,6 +39,10 @@ public class CastSkillAssist
             //{
             //    continue;
             //}
+            //if(npc .HP <=0)
+            //{
+                
+            //}
 
             var dis = Util.Distance2D(npc.transform .position, _owner.transform .position);
             if(dis>GameSetting .MaxAutoSelectDis )
