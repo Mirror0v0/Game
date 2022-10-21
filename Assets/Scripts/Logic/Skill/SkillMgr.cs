@@ -138,7 +138,11 @@ public class SkillMgr
             }
         }
         _owner .curTarget = _skillAssit.SelectEnemy();
-        if(_owner.curTarget.HP <= 0)
+        if (_owner.curTarget == null)
+        {
+            return;
+        }
+        if (_owner.curTarget.HP <= 0)
         {
             return;
         }

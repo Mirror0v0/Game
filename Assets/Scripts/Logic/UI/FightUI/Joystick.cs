@@ -20,6 +20,7 @@ public class Joystick
     private float _radius = 0;
     private Vector2 _centerPos;
     private Vector2 _dir;
+    private Timer _timer;
 
     public Joystick()
     {
@@ -33,7 +34,13 @@ public class Joystick
         touchEx.PointDownCallback = OnPointDown;
         touchEx.PointUpCallback = OnPointUp;
 
-        TimerMgr.instance.CreateTimerAndStart(0.02f, -1, OnLoop);
+        _timer = TimerMgr.instance.CreateTimerAndStart(0.02f, -1, OnLoop);
+    }
+
+    public void ResetTimer()
+    {
+        _timer.Stop();
+        _timer = null;
     }
 
     public void Reset()

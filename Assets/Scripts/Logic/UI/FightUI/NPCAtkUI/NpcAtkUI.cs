@@ -20,6 +20,15 @@ public class NpcAtkUI
         TimerMgr.instance.CreateTimerAndStart(0.02f, -1, FollowTarget);
     }
 
+    public void SetActive(bool isActive)
+    {
+        if (_root == null)
+        {
+            return;
+        }
+        _root.SetActive(isActive);
+    }
+
     private void FollowTarget()
     {
         CalculatePos();
@@ -27,6 +36,10 @@ public class NpcAtkUI
 
     public void CalculatePos()
     {
+        if(_owner ==null )
+        {
+            return;
+        }
         Vector2 pos = Camera.main.WorldToScreenPoint((_owner as Npc).atkArragePos . transform.position);
         _root.transform.position = pos;
     }

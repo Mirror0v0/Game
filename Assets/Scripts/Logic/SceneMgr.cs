@@ -15,15 +15,15 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class SceneMgr : Singleton<SceneMgr>
 {
-    public void LoadScene(string sceneName, Action onLoadEnd)
+    public void LoadScene(string sceneName, Action onLoadEnd=null)
     {
-        UIManager.instance.EventSystemEnabled = false;
+        //UIManager.instance.EventSystemEnabled = false;
         SceneManager.LoadScene(sceneName);
         if(onLoadEnd !=null )
         {
             onLoadEnd();
         }
-        UIManager.instance.EventSystemEnabled = true;
+        //UIManager.instance.EventSystemEnabled = true;
     }
 
 
@@ -47,6 +47,11 @@ public class SceneMgr : Singleton<SceneMgr>
         {
             onLoadEnd();
         }
+    }
+
+    public string GetCurrentSceneName()
+    {
+        return SceneManager.GetActiveScene().name;
     }
 }
 

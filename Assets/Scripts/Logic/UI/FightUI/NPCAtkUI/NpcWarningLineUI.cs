@@ -59,6 +59,10 @@ public class NpcWarningLineUI
 
     public void CalculatePos()
     {
+        if(_owner ==null )
+        {
+            return;
+        }
         Vector3 pos = Camera.main.WorldToScreenPoint((_owner as Npc).warningLinePos.transform.position);
         _root.transform.position = pos;
     }

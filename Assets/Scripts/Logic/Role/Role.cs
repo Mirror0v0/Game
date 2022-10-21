@@ -22,11 +22,17 @@ public class Role:Creature
         _selectMgr.Init(this);
         _skillMgr.autoSelectCallback += SelectCreature;
         BindingControlEvent();
+        Debug.Log("主角初始化");
     }
 
     private void Awake()
     {
         RoleMgr.instance.CreateSceneRole(this);
+    }
+    public override void OnDestroy()
+    {
+        base.OnDestroy();
+        RoleMgr.instance.roleList.Remove(this);
     }
 
     public override void Update()

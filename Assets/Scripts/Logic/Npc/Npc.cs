@@ -53,8 +53,14 @@ public class Npc:Creature
         _npcWarningLine = new NpcWarningLineUI();
         _npcWarningLine.Init(this);
         _npcWarningLine.onLineFull = OnLineFull;
+        Debug.Log("敌人初始化");
     }
 
+    private void SetUIActiveFalse()
+    {
+        _npcAtkUI.SetActive(false);
+        _npcWarningLine.SetActive(false);
+    }
     private void OnLineFull()
     {
         Debug.Log("游戏失败");
@@ -67,6 +73,7 @@ public class Npc:Creature
 
     private void Start()
     {
+        //_targetRole = RoleMgr.instance.roleList[RoleMgr .instance .roleList .Count -1];//就一个主角，这里简单获取
         _targetRole = RoleMgr.instance.roleList[0];//就一个主角，这里简单获取
         //DrawTool.DrawSectorSolid(transform, transform.localPosition, 60, 3);
         //DrawTool.DrawSector(transform, transform.localPosition, 60, 3);
@@ -75,7 +82,16 @@ public class Npc:Creature
     public override void OnDestroy()
     {
         base.OnDestroy();
+        _npcWarningLine = null;
+        _npcAtkUI = null;
         NpcMgr.instance.allNpc.Remove(this);
+    }
+
+    protected override void OnDie()
+    {
+        base.OnDie();
+        collider.isTrigger = true;
+        SetUIActiveFalse();
     }
 
     public override void Update()

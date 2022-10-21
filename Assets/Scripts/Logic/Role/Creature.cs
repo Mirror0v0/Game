@@ -18,6 +18,8 @@ public class Creature : MonoBehaviour
     protected SkillMgr _skillMgr = new SkillMgr();
 
     public Transform backPos;
+    //protected Rigidbody2D rig;
+    protected Collider2D collider;
 
     //能否放技能
     public bool isCastingSkill
@@ -123,6 +125,8 @@ public class Creature : MonoBehaviour
         this.tableData = tableData;
         _animator = this.GetComponent<Animator>();
         _skillMgr.Init(this);
+        //rig = this.GetComponent<Rigidbody2D>();
+        collider = this.GetComponent<Collider2D>();
     }
 
     //技能的施放

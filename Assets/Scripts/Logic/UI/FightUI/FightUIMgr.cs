@@ -15,6 +15,8 @@ public class FightUIMgr:Singleton<FightUIMgr>
     private TargetHead _targetHead;
     //技能按钮
     private SkillAtkDlg _skillDlgAtk;
+    //菜单键
+    private Menu _menu;
 
     public void Init()
     {
@@ -37,6 +39,10 @@ public class FightUIMgr:Singleton<FightUIMgr>
             SetHideImage(false, 1);
             SetHideImage(true, 0);
         }
+        if(_menu ==null )
+        {
+            _menu = new Menu();
+        }
     }
 
     public void BindingJoystick(Action<Vector2> onJoystickMove, Action onJoystickMoveEnd)
@@ -58,6 +64,7 @@ public class FightUIMgr:Singleton<FightUIMgr>
         }
         _joystick.OnMoveDir = null;
         _joystick.OnMoveEnd = null;
+        _joystick = null;
     }
 
     public void Reset()
@@ -67,6 +74,21 @@ public class FightUIMgr:Singleton<FightUIMgr>
         ResetJoystick();
         ResetSkillAtkDlg();
         ResetTargetHead();
+        ReserRoleHead();
+        Resetmenu();
+        UIManager.instance.RemoveLayer(UILayer.FightUI);
+        UIManager.instance.RemoveLayer(UILayer.Scene);
+        //ReserRoleHead();
+        //Resetmenu();
+    }
+
+    private void Resetmenu()
+    {
+        _menu = null;
+    }
+    private void ReserRoleHead()
+    {
+        _roleHead = null;
     }
 
     private void ResetJoystick()
@@ -77,6 +99,7 @@ public class FightUIMgr:Singleton<FightUIMgr>
         }
         //摇杆的小球要归位
         _joystick.Reset();
+        //_joystick.ResetTimer();
     }
 
     public void SetTargetInfo(int curHp, int maxHp, bool bActive = true)//要对接血条，因此要继续加参数，并且给血量数值默认参数都为-1（不要给默认值）
@@ -113,6 +136,7 @@ public class FightUIMgr:Singleton<FightUIMgr>
             return;
         }
         _skillDlgAtk.OnSkillBtnClick = null;
+        _skillDlgAtk = null;
     }
 
     private void ResetTargetHead()
@@ -122,10 +146,15 @@ public class FightUIMgr:Singleton<FightUIMgr>
             return;
         }
         _targetHead.Hide();
+        _targetHead = null;
     }
 
     public void SetHideImage(bool isActive,int index=0)
     {
+        if(_skillDlgAtk ==null )
+        {
+            return;
+        }
         _skillDlgAtk.HideImageSetActive(isActive, index);
     }
 
