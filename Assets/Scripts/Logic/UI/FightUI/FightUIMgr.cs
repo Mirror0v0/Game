@@ -17,6 +17,10 @@ public class FightUIMgr:Singleton<FightUIMgr>
     private SkillAtkDlg _skillDlgAtk;
     //菜单键
     private Menu _menu;
+    //胜利界面
+    private FightWin _fightWin;
+    //失败界面
+    private FightLose _fightLose;
 
     public void Init()
     {
@@ -42,6 +46,16 @@ public class FightUIMgr:Singleton<FightUIMgr>
         if(_menu ==null )
         {
             _menu = new Menu();
+        }
+        if(_fightWin ==null )
+        {
+            _fightWin = new FightWin();
+            FightWinSetActive(false);
+        }
+        if(_fightLose ==null )
+        {
+            _fightLose = new FightLose();
+            FightLoseSetActive(false);
         }
     }
 
@@ -80,6 +94,16 @@ public class FightUIMgr:Singleton<FightUIMgr>
         UIManager.instance.RemoveLayer(UILayer.Scene);
         //ReserRoleHead();
         //Resetmenu();
+    }
+
+    public void FightWinSetActive(bool isActive)
+    {
+        _fightWin.SetFightWinUIActive(isActive);
+    }
+
+    public void FightLoseSetActive(bool isActive)
+    {
+        _fightLose.SetFightLoseUIActive(isActive);
     }
 
     private void Resetmenu()
