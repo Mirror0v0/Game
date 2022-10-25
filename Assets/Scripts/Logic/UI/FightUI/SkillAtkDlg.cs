@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class SkillAtkDlg
@@ -13,6 +14,10 @@ public class SkillAtkDlg
     private List<SkillPanel> _allSkillPanel = new List<SkillPanel>();
 
     public Action<int> OnSkillBtnClick;
+
+    public bool isPress = false;
+    public Action<bool> OnPress;
+
 
     public SkillAtkDlg()
     {
@@ -29,6 +34,36 @@ public class SkillAtkDlg
             skillPanel.btn.onClick.AddListener(() => { OnSkillClick(index); });
             _allSkillPanel.Add(skillPanel);
         }
+
+        var touchEx = _allSkillPanel[1].btn.gameObject.GetComponent<TouchEX>();
+        touchEx.DragCallback = OnDrag;
+        touchEx.PointDownCallback = OnPointDown;
+        touchEx.PointUpCallback = OnPointUp;
+        TimerMgr.instance.CreateTimerAndStart(0.02f, -1, OnLoop);
+    }
+
+    private void OnLoop()
+    {
+        if(OnPress !=null )
+        {
+            Debug.Log("交互键是否按下" + isPress);
+            OnPress(isPress);
+        }
+    }
+
+    private void OnPointUp(PointerEventData obj)
+    {
+        isPress = false;
+    }
+
+    private void OnPointDown(PointerEventData obj)
+    {
+        isPress = true;
+    }
+
+    private void OnDrag(PointerEventData obj)
+    {
+        
     }
 
     public void HideImageSetActive(bool isActive,int index)

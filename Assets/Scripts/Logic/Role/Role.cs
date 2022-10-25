@@ -16,6 +16,11 @@ public class Role:Creature
 
     private Npc _targetNpc;
 
+    [SerializeField]
+    private float _curEnemyColectHp = 0;
+    private float _maxEnemyColectHp = 100;
+    private float _curEnemyColectHpTime = 0;
+    private float _curEnemyColectHpTimer = 1;
     public override void Init(CreateSceneCreature serverData, CreatureSceneDatabase tableData)
     {
         base.Init(serverData, tableData);
@@ -66,7 +71,29 @@ public class Role:Creature
         Debug.Log("摇杆事件绑定初始化");
         FightUIMgr.instance.BindingJoystick(OnJoystickMove, OnJoystickMoveEnd);
         //绑定技能事件
-        FightUIMgr.instance.BindSkillBtn(OnSkill);
+        FightUIMgr.instance.BindSkillBtn(OnSkill,OnPress);
+    }
+
+    private void OnPress(bool isPress)
+    {
+        if(isPress )
+        {
+            //读条
+            //_curEnemyColectHpTime += Time.deltaTime*2;
+            //FightUIMgr.instance.SetEnemyCollectionUIInfo(_curEnemyColectHpTime, _curEnemyColectHpTimer);
+            //固定时间结束后回收尸体
+            if (_targetNpc != null && _targetNpc.HP <= 0)
+            {
+                Debug.Log("回收尸体");
+                _curEnemyColectHpTime += Time.deltaTime * 2;
+                FightUIMgr.instance.SetEnemyCollectionUIInfo(_curEnemyColectHpTime, _curEnemyColectHpTimer);
+                if(_curEnemyColectHpTime >=_curEnemyColectHpTimer )
+                {
+                    _curEnemyColectHpTime = 0;
+                    ResMgr.instance.Release(_targetNpc.gameObject);
+                }
+            }
+        }
     }
 
     private void OnJoystickMoveEnd()

@@ -21,6 +21,8 @@ public class FightUIMgr:Singleton<FightUIMgr>
     private FightWin _fightWin;
     //失败界面
     private FightLose _fightLose;
+    //回收界面
+    private EnemyCollection _enemyCollection;
 
     public void Init()
     {
@@ -56,6 +58,12 @@ public class FightUIMgr:Singleton<FightUIMgr>
         {
             _fightLose = new FightLose();
             FightLoseSetActive(false);
+        }
+        if(_enemyCollection==null )
+        {
+            _enemyCollection = new EnemyCollection();
+            _enemyCollection.Hide();
+            _enemyCollection.ResetInfo();
         }
     }
 
@@ -144,13 +152,14 @@ public class FightUIMgr:Singleton<FightUIMgr>
         }
     }
 
-    public void BindSkillBtn(Action<int> skillBtnCallback)
+    public void BindSkillBtn(Action<int> skillBtnCallback,Action <bool >onPress)
     {
         if (_skillDlgAtk == null)
         {
             return;
         }
         _skillDlgAtk.OnSkillBtnClick = skillBtnCallback;
+        _skillDlgAtk.OnPress = onPress;
     }
 
     private void ResetSkillAtkDlg()
@@ -180,6 +189,33 @@ public class FightUIMgr:Singleton<FightUIMgr>
             return;
         }
         _skillDlgAtk.HideImageSetActive(isActive, index);
+    }
+
+    public void HideEnemyCollectionUI()
+    {
+        if (_enemyCollection == null)
+        {
+            return;
+        }
+        _enemyCollection.ResetInfo();
+    }
+
+    public void ResetEnemyCollectionUI()
+    {
+        if (_enemyCollection == null)
+        {
+            return;
+        }
+        _enemyCollection.ResetInfo();
+    }
+
+    public void SetEnemyCollectionUIInfo(float curHp, float maxHp, bool bActive = true)
+    {
+        if(_enemyCollection ==null )
+        {
+            return;
+        }
+        _enemyCollection.SetInfo(curHp, maxHp, bActive);
     }
 
 }
